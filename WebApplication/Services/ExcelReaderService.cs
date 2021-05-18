@@ -9,7 +9,6 @@ namespace WebApplication.Services
 {
     public class ExcelReaderService : IExcelReaderService
     {
-        
         public DataSet Read(string path)
         {
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);

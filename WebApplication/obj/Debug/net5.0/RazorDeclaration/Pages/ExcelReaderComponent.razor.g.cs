@@ -119,54 +119,33 @@ using WebApplication.Data.Persona;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 34 "/home/sebastian/RiderProjects/WebApplication/WebApplication/Pages/ExcelReaderComponent.razor"
+#line 44 "/home/sebastian/RiderProjects/WebApplication/WebApplication/Pages/ExcelReaderComponent.razor"
  
+
+    public int tabIndex = 0;
     string source;
     DataTable table;
     List<Persona> personasLista = new List<Persona>();
+    List<DataTable> tablas = new List<DataTable>();
 
     protected void ProcessExcel()
     {
         string path = @"/home/sebastian/Descargas/HojaPruebas.xlsx";
-        var DataSet = _excelReaderService.Read(path);
-        foreach (DataTable table in DataSet.Tables)
+        DataSet dataSet = _excelReaderService.Read(path);
+        foreach (DataTable table in dataSet.Tables)
         {
+            tablas.Add(table);
             foreach (DataRow row in table.Rows)
             {
                 personasLista.Add(new Persona()
                 {
-                    Apellido = (string) row ["Apellido"],
-                    Nombre = (string) row ["Nombre"],
-                    Aficion = (string) row ["Aficion"]
+                    Apellido = (string) row["Apellido"],
+                    Nombre = (string) row["Nombre"],
+                    Aficion = (string) row["Aficion"]
                 });
             }
         }
-
-/*
-        foreach (DataColumn persona in a)
-        {
-            personasLista.Add(new Persona()
-            {
-                Nombre = persona.Prefix,
-            });
-        }
-
-
-    //TODO: Preguntar si necesitamos crear un objeto por cada una de las tablas
-
-    /*
-DataRow row = table.Rows[0];
-string cell = row[0].ToString();
-
-Persona persona = new Persona()
-{
-Apellido = row[0].ToString(),
-Aficion = row[1].ToString(),
-Nombre = row[2].ToString()
-};
-*/
     }
-
 
 #line default
 #line hidden

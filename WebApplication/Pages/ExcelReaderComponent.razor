@@ -15,40 +15,51 @@
 <input type='file' id="FileManager" @bind=source/>
 <button class="btn btn-primary" @onclick="ProcessExcel">Importar</button>
 
-<MatTable Items="@personasLista" class="mat-elevation-z5">
-    <MatTableHeader>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Aficion</th>
-    </MatTableHeader>
-    <MatTableRow>
-        <td>@context.Nombre</td>
-        <td>@context.Apellido</td>
-        <td>@context.Aficion</td>
-    </MatTableRow>
-</MatTable>
 
+<MatTabGroup @bind-ActiveIndex="@tabIndex">
+    @foreach (DataTable tabla in tablas)
+    {
+        <MatTab Label=@tabla.TableName>
+            <MatTable Items="@personasLista" class="mat-elevation-z5">
+                <MatTableHeader>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Aficion</th>
+                </MatTableHeader>
+                <MatTableRow>
+                    <td>@context.Nombre</td>
+                    <td>@context.Apellido</td>
+                    <td>@context.Aficion</td>
+                </MatTableRow>
+            </MatTable>
+        </MatTab>
+    }
+</MatTabGroup>
 </body>
 
 @code
 {
+
+    public int tabIndex = 0;
     string source;
     DataTable table;
     List<Persona> personasLista = new List<Persona>();
+    List<DataTable> tablas = new List<DataTable>();
 
     protected void ProcessExcel()
     {
         string path = @"/home/sebastian/Descargas/HojaPruebas.xlsx";
-        var DataSet = _excelReaderService.Read(path);
-        foreach (DataTable table in DataSet.Tables)
+        DataSet dataSet = _excelReaderService.Read(path);
+        foreach (DataTable table in dataSet.Tables)
         {
+            tablas.Add(table);
             foreach (DataRow row in table.Rows)
             {
                 personasLista.Add(new Persona()
                 {
-                    Apellido = (string) row ["Apellido"],
-                    Nombre = (string) row ["Nombre"],
-                    Aficion = (string) row ["Aficion"]
+                    Apellido = (string) row["Apellido"],
+                    Nombre = (string) row["Nombre"],
+                    Aficion = (string) row["Aficion"]
                 });
             }
         }
