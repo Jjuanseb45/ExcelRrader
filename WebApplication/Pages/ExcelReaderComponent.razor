@@ -1,0 +1,56 @@
+@page "/excelreader"
+
+@using WebApplication.Services
+@using System.Data
+@using MatBlazor
+@using WebApplication.Data.Persona
+
+@inject IExcelReaderService _excelReaderService;
+<head>
+    <link rel="stylesheet" href="ExcelReaderComponent.razor.css">
+</head>
+
+<body>
+<h3>ExcelReaderComponent</h3>
+<input type='file' id="FileManager" @bind=source/>
+<button class="btn btn-primary" @onclick="ProcessExcel">Importar</button>
+
+<MatTable Items="@personasLista" class="mat-elevation-z5">
+    <MatTableHeader>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Aficion</th>
+    </MatTableHeader>
+    <MatTableRow>
+        <td>@context.Nombre</td>
+        <td>@context.Apellido</td>
+        <td>@context.Aficion</td>
+    </MatTableRow>
+</MatTable>
+
+</body>
+
+@code
+{
+    string source;
+    DataTable table;
+    List<Persona> personasLista = new List<Persona>();
+
+    protected void ProcessExcel()
+    {
+        string path = @"/home/sebastian/Descargas/HojaPruebas.xlsx";
+        var DataSet = _excelReaderService.Read(path);
+        foreach (DataTable table in DataSet.Tables)
+        {
+            foreach (DataRow row in table.Rows)
+            {
+                personasLista.Add(new Persona()
+                {
+                    Apellido = (string) row ["Apellido"],
+                    Nombre = (string) row ["Nombre"],
+                    Aficion = (string) row ["Aficion"]
+                });
+            }
+        }
+    }
+}

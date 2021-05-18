@@ -1,0 +1,77 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/sebastian/RiderProjects/WebApplication/WebApplication/WebApplication.csproj": {}
+  },
+  "projects": {
+    "/home/sebastian/RiderProjects/WebApplication/WebApplication/WebApplication.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/sebastian/RiderProjects/WebApplication/WebApplication/WebApplication.csproj",
+        "projectName": "WebApplication",
+        "projectPath": "/home/sebastian/RiderProjects/WebApplication/WebApplication/WebApplication.csproj",
+        "packagesPath": "/home/sebastian/.nuget/packages/",
+        "outputPath": "/home/sebastian/RiderProjects/WebApplication/WebApplication/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/sebastian/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "ExcelDataReader": {
+              "target": "Package",
+              "version": "[3.7.0-develop00310, )"
+            },
+            "ExcelDataReader.DataSet": {
+              "target": "Package",
+              "version": "[3.7.0-develop00310, )"
+            },
+            "MatBlazor": {
+              "target": "Package",
+              "version": "[2.9.0-develop-042, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.203/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
